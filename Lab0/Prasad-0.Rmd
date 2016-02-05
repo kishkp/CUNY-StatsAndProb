@@ -1,11 +1,11 @@
 ---
 title: "Introduction to R and RStudio"
 output:
+  pdf_document: default
   html_document:
     css: ./lab.css
     highlight: pygments
     theme: cerulean
-  pdf_document: default
 ---
 
 The goal of this lab is to introduce you to R and RStudio, which you'll be using
@@ -20,7 +20,7 @@ get to that stage, however, you need to build some basic fluency in R.  Today we
 begin with the fundamental building blocks of R and RStudio: the interface, 
 reading in data, and basic commands.
 
-![rinterface](more/rInterface2014.png)
+![rinterface](https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/Lab0/more/rInterface2014.png)
 
 The panel in the upper right contains your *workspace* as well as a history of 
 the commands that you've previously entered.  Any plots that you generate will 
@@ -40,7 +40,7 @@ To get you started, enter the following command at the R prompt (i.e. right afte
 from this document.
 
 ```{r load-abrbuthnot-data, eval=TRUE}
-source("more/arbuthnot.R")
+source("https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/Lab0/more/arbuthnot.R")
 ```
 
 This command instructs R to access the OpenIntro website and fetch some data: 
@@ -266,8 +266,8 @@ analysis of Arbuthnot's baptism data. Your assignment involves repeating these
 steps, but for present day birth records in the United States.  Load up the 
 present day data with the following command.
 
-```{r load-present-data, eval=FALSE}
-source("more/present.R")
+```{r load-present-data, eval=TRUE}
+source("https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/Lab0/more/present.R")
 ```
 
 The data are stored in a data frame called `present`.
@@ -275,17 +275,55 @@ The data are stored in a data frame called `present`.
 -   What years are included in this data set? What are the dimensions of the 
     data frame and what are the variable or column names?
 
+```{r}
+present$year
+dim(present)
+names(present)
+```
+
+
+
 -   How do these counts compare to Arbuthnot's? Are they on a similar scale?
+
+```{r}
+summary(arbuthnot)
+summary(present)
+```
+
+**We can see that the birth counts for both boys and girls in the "Present" dataset is quite high compared to the "Arbuthnot" dataset. The "Arbuthnot" baptism data are in thousands whereas in "present" birth counts data are in the million range.**
+
+
+
 
 -   Make a plot that displays the boy-to-girl ratio for every year in the data 
     set. What do you see? Does Arbuthnot's observation about boys being born in
     greater proportion than girls hold up in the U.S.? Include the plot in your 
     response.
 
+```{r}
+plot(present$year, present$boys / present$girls, type = "l")
+
+```
+
+**From the plot we can see that the boys are born in greater proportion even in the "present" dataset. However, the trend is decreasing. The recent years are seeing a more balanced birth.**
+
+
+
+
 -   In what year did we see the most total number of births in the U.S.? You can
     refer to the help files or the R reference card 
     [http://cran.r-project.org/doc/contrib/Short-refcard.pdf](http://cran.r-project.org/doc/contrib/Short-refcard.pdf)
     to find helpful commands.
+
+```{r}
+
+present[order(present[,2] + present[,3],decreasing = TRUE)[1],1]
+
+```
+**source : http://stackoverflow.com/questions/743622/finding-row-index-containing-maximum-value-using-r**
+
+
+
 
 These data come from a report by the Centers for Disease Control 
 [http://www.cdc.gov/nchs/data/nvsr/nvsr53/nvsr53_20.pdf](http://www.cdc.gov/nchs/data/nvsr/nvsr53/nvsr53_20.pdf). 
