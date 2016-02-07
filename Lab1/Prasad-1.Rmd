@@ -1,10 +1,11 @@
 ---
 title: "Introduction to data"
 output:
+  pdf_document: default
   html_document:
-    theme: cerulean
-    highlight: pygments
     css: ./lab.css
+    highlight: pygments
+    theme: cerulean
 ---
 
 Some define Statistics as the field that focuses on turning information into
@@ -36,7 +37,7 @@ We begin by loading the data set of 20,000 observations into the R workspace.
 After launching RStudio, enter the following command.
 
 ```{r load-data, eval=FALSE}
-source("more/cdc.R")
+source("https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/Lab1/more/cdc.R")
 ```
 
 The data set `cdc` that shows up in your workspace is a *data matrix*, with each
@@ -437,25 +438,79 @@ will serve us well throughout this course.
 -   Make a scatterplot of weight versus desired weight. Describe the 
     relationship between these two variables.
 
+```{r}
+source("https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/Lab1/more/cdc.R")
+plot(x = cdc$weight, y = cdc$wtdesire)
+
+```
+
+**There seems to be a good correlation between the weight and desired weight.**
+
 -   Let's consider a new variable: the difference between desired weight 
     (`wtdesire`) and current weight (`weight`). Create this new variable by 
     subtracting the two columns in the data frame and assigning them to a new 
     object called `wdiff`.
 
+```{r}
+
+cdc$wdiff <- cdc$wtdesire - cdc$weight
+
+
+```
+
 -   What type of data is `wdiff`? If an observation `wdiff` is 0, what does 
     this mean about the person's weight and desired weight. What if `wdiff` is 
     positive or negative?
+
+**wdiff is continuous. If wdiff is 0 it means that the person is of ideal weight. If wdiff is positive then it means that person feels underweight. If it is negative, then it means that the person feels overweight.**
 
 -   Describe the distribution of `wdiff` in terms of its center, shape, and 
     spread, including any plots you use. What does this tell us about how people 
     feel about their current weight?
 
+```{r}
+
+hist(cdc$wdiff, breaks=100)
+boxplot(cdc$wdiff)
+summary(cdc$wdiff)
+
+```
+
+**The histogram  gives us an indication of the shape of the distribution. From the histogram it seems that the distribution is slightly left skewed.**
+
+**The mean is approximately -15 and median is -10. Since the mean is to the left of the median, it shows the left skew in the data.** 
+
+**The shape is unimodal with the mode at slightly below zero.**
+
+**Overall the wdiff indicates that slightly more people view themselves as overweight.**  
+
 -   Using numerical summaries and a side-by-side box plot, determine if men tend
     to view their weight differently than women.
+
+```{r}
+
+summary(cdc[cdc$gender%in% c('m'),]$wdiff)
+summary(cdc[cdc$gender%in% c('f'),]$wdiff)
+
+boxplot(cdc$wdiff~cdc$gender, outline=FALSE)
+
+```
+
+**From the respective summaries and boxplot it seems that women are more sensitive to their weights than men but only slightly.**  
 
 -   Now it's time to get creative. Find the mean and standard deviation of 
     `weight` and determine what proportion of the weights are within one 
     standard deviation of the mean.
+
+```{r}
+Mean <- mean(cdc$weight)
+SD <- sd(cdc$weight)
+
+nrow(cdc[cdc$weight>(Mean-SD) & cdc$weight<(Mean+SD),]) /  nrow(cdc)
+
+```
+
+**70.76% of the weights are within 1 standard deviation of the mean.**
 
 <div id="license">
 This is a product of OpenIntro that is released under a 
