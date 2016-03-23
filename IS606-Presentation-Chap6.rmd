@@ -1,0 +1,10 @@
+---
+title: "IS606 - Presentation  -Chapter 6"
+author: "Kishore Prasad"
+date: "March 23, 2016"
+output: html_document
+---
+
+In this session we will look at 
+
+![Alt Text](/Capture.PNG)
