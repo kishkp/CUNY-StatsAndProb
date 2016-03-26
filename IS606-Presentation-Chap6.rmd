@@ -5,6 +5,79 @@ date: "March 23, 2016"
 output: html_document
 ---
 
-In this session we will look at 
+In this session we will look at the following problem 
 
-![Alt Text](/Capture.PNG)
+![6.47](https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/IS606-Pres-Chap6-ProblemStatement.PNG)
+
+
+**Solution:** 
+
+To check whether there is a statistically significant difference between the Grads and Non-Grads, we form the following hypotheses:
+
+H~0~: There is no difference in support between the 2 groups.
+
+H~A~: There is a difference in support between the 2 groups.
+
+
+Lets first calculate the row totals and change the layout of the table.
+
+
+| College Grad | Yes | No  | Total |
+|--------------|-----|-----|-------|
+|  Support     | 154 | 132 |  286  |
+|  oppose      | 180 | 126 |  306  |
+|  Do Not Know | 104 | 131 |  235  |
+|    Total     | 438 | 389 |  827  |
+
+
+Next we calculate the expected count for each cell. The expected count for each cell is calculated with the following formula:
+
+Expected count ~row~ ~i,~ ~col~ ~j~ = $\frac{(row ~i~ total, col ~j~ total)} {(table total)}$
+
+Using the above formula for each cell, we get the following expected counts table:
+
+
+| College Grad | Yes   | No    |
+|--------------|-------|-------|
+|  Support     | 151.5 | 134.5 |
+|  oppose      | 162.1 | 143.9 |
+|  Do Not Know | 124.5 | 110.5 |
+
+
+Next we calculate the following  formula for each cell:
+
+$\frac{(Observed count~i,j~ - expected count~i,j~)^2} {(expected count~i,j)}$
+
+Using the above formula, we get the following table:
+
+| College Grad | Yes   | No    |
+|--------------|-------|-------|
+|  Support     |  0.04 |  0.05 |
+|  oppose      |  1.98 |  2.23 |
+|  Do Not Know |  3.36 |  3.79 |
+
+
+The chi-square statistic is calculated by summing up all the values in the above table.
+
+The degrees of freedom is calculated using the following formula:
+
+df = (rows - 1) x (cols - 1)
+
+
+Chi-Square statistic
+
+Thus we have the following values:
+
+$\chi^2 = 4.3$
+
+and 
+
+$df = 2$
+
+The p-value for this is `r 1 - pchisq(4.3, df = 2)`
+
+**Since this value is higher than 0.05, we fail to reject the null hypotheses**
+
+**It can be concluded that there is no difference in support between the 2 groups**
+
+

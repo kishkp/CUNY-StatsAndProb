@@ -15,6 +15,9 @@ if (before && options$fig.show!='none') par(mar=c(4,4,.2,.1),cex.lab=.95,cex.axi
 ```{r}
 # load data
 
+URL_list <- read.csv("https://raw.githubusercontent.com/RobertSellers/SlackProjects/master/data/webpages.csv", stringsAsFactors = FALSE)
+
+
 ```
 
 
@@ -22,50 +25,57 @@ if (before && options$fig.show!='none') par(mar=c(4,4,.2,.1),cex.lab=.95,cex.axi
 
 **You should phrase your research question in a way that matches up with the scope of inference your dataset allows for.**
 
-
+The goal of this research is to find if there is a link between Pollution levels and incidence of Tuberculosis. There have been studies that indicate that there is a relation between indoor pollution / smoking to TB. However, in this proposal I am looking to study if PM2.5 Air Pollution has any effect on incidence of TB.
 
 ### Cases 
 
 **What are the cases, and how many are there?**
 
-
+There are 214 countries with Pollution data every 5 years between 1990 to 2010 and then in 2011 and in 2013. The data for TB is available from 1990 onwards to 2014.
 
 ### Data collection 
 
 **Describe the method of data collection.**
 
-
+The data is sourced from the data respository maintained by World Bank. Hence it is secondary data. This secondary data is collected from the World Bank website.
 
 ### Type of study 
 
 **What type of study is this (observational/experiment)?**
 
-
+This is an Obersvational study
 
 ### Data Source 
 
 **If you collected the data, state self-collected. If not, provide a citation/link.**
 
+The data is a part of the World Bank data. The required data for the 2 variables in question are available for download from the website. 
 
+http://data.worldbank.org/indicator/EN.ATM.PM25.MC.ZS?page=5&display=default
+http://data.worldbank.org/indicator/SH.TBS.INCD?display=default
 
 
 ### Response 
 
 **What is the response variable, and what type is it (numerical/categorical)?**
 
+In this study, I am trying to explain an increase / decrease in the occurance of TB based on the increase / decrease in the pollution rate. 
 
+The Response variable is Incidence of TB., It is a numeric variable.
 
 ### Explanatory 
 
 **What is the explanatory variable, and what type is it (numerical/categorival)?**
 
+The Explanatory variable is the Pollution data
 
 
 ### Relevant summary statistics 
 
-**Provide summary statistics relevant to your research question. For example, if you’re comparing means across groups provide means, SDs, sample sizes of each group. This step requires the use of R, hence a code chunk is provided below. Insert more code chunks as needed.**
+**Provide summary statistics relevant to your research question. For example, if you are comparing means across groups provide means, SDs, sample sizes of each group. This step requires the use of R, hence a code chunk is provided below. Insert more code chunks as needed.**
 
 ```{r}
+
 
 ```
 
