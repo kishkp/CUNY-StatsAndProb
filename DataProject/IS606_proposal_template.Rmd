@@ -1,3 +1,6 @@
+---
+output: pdf_document
+---
 ```{r include=FALSE, cache=FALSE}
 # DO NOT REMOVE
 # THIS IS FOR SETTING SOME PLOTTING PARAMETERS SO THAT YOUR PLOTS DON'T TAKE UP TOO MUCH SPACE
@@ -15,7 +18,9 @@ if (before && options$fig.show!='none') par(mar=c(4,4,.2,.1),cex.lab=.95,cex.axi
 ```{r}
 # load data
 
-URL_list <- read.csv("https://raw.githubusercontent.com/RobertSellers/SlackProjects/master/data/webpages.csv", stringsAsFactors = FALSE)
+TB_data_raw <- read.csv("https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/DataProject/Incidence%20of%20TB.csv", stringsAsFactors = FALSE)
+
+Pollution_data_raw <- read.csv("https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/DataProject/PM25%20air%20pollution.csv", stringsAsFactors = FALSE)
 
 
 ```
@@ -39,6 +44,10 @@ There are 214 countries with Pollution data every 5 years between 1990 to 2010 a
 
 The data is sourced from the data respository maintained by World Bank. Hence it is secondary data. This secondary data is collected from the World Bank website.
 
+World Bank in turn gets the TB data from the Global Tuberculosis Report of World Health Organization (WHO)
+
+similarly, the pollution data is sourced by World Bank from Brauer, M. et al. 2015. "Ambient Air Pollution Exposure Estimation for the Global Burden of Disease 2013." (Paper submitted for publication.), Institute for Health Metrics and Evaluation, University of Washington, Seattle.
+
 ### Type of study 
 
 **What type of study is this (observational/experiment)?**
@@ -52,6 +61,7 @@ This is an Obersvational study
 The data is a part of the World Bank data. The required data for the 2 variables in question are available for download from the website. 
 
 http://data.worldbank.org/indicator/EN.ATM.PM25.MC.ZS?page=5&display=default
+
 http://data.worldbank.org/indicator/SH.TBS.INCD?display=default
 
 
@@ -59,9 +69,12 @@ http://data.worldbank.org/indicator/SH.TBS.INCD?display=default
 
 **What is the response variable, and what type is it (numerical/categorical)?**
 
-In this study, I am trying to explain an increase / decrease in the occurance of TB based on the increase / decrease in the pollution rate. 
+In this study, I am trying to explain an increase / decrease in the occurance of TB based on the increase / decrease in the pollution rate. The Response variable is Incidence of TB. 
 
-The Response variable is Incidence of TB., It is a numeric variable.
+It is a numeric variable.
+
+Incidence of tuberculosis (per 100,000 people) is the estimated number of new and relapse tuberculosis cases arising in a given year, expressed as the rate per 100,000 population. All forms of TB are included, including cases in people living with HIV. 
+
 
 ### Explanatory 
 
@@ -69,13 +82,25 @@ The Response variable is Incidence of TB., It is a numeric variable.
 
 The Explanatory variable is the Pollution data
 
+PM2.5 air pollution, population exposed to levels exceeding WHO guideline value (% of total) is defined as the portion of a country's population living in places where mean annual concentrations of PM2.5 are greater than 10 micrograms per cubic meter, the guideline value recommended by the World Health Organization as the lower end of the range of concentrations over which adverse health effects due to PM2.5 exposure have been observed.
 
 ### Relevant summary statistics 
 
 **Provide summary statistics relevant to your research question. For example, if you are comparing means across groups provide means, SDs, sample sizes of each group. This step requires the use of R, hence a code chunk is provided below. Insert more code chunks as needed.**
 
+The summary for Incidence of TB are as below:
+
 ```{r}
 
+summary(TB_data_raw)
 
 ```
 
+
+Similarly, the summary for Pollution are as below:
+
+```{r}
+
+summary(Pollution_data_raw)
+
+```
