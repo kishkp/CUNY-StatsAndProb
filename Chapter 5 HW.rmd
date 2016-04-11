@@ -2,20 +2,279 @@
 title: "Chapter 5 HW"
 author: "Kishore Prasad"
 date: "March 31, 2016"
-output: html_document
+output: pdf_document
 ---
 
-![5.6](https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/images/ex5.6.PNG)
+
+![5.6](https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/images/Ex5.6.png)
+
+```{r}
+
+margin_of_error <- (77 - 65) / 2
+
+sample_mean <- 65 + margin_of_error 
+
+number_obs <- 25
+
+degrees_freedom <- number_obs - 1
 
 
-![5.14](https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/images/ex5.14.PNG)
+# t value lookup for 90% CI
+
+confidence_interval <- 0.90
+alpha <- 1 - confidence_interval
+t_lookup <- (1 - (alpha / 2))
 
 
-![5.20](https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/images/ex5.20.PNG)
+t <- qt(t_lookup, degrees_freedom)
+
+standard_error <- margin_of_error / t
+
+std_dev <- standard_error * sqrt(number_obs)
+
+```
+\
+**Following are the calculated values:**\  
+
+**sample mean                 =** `r sample_mean`\
+**standard deviation          =** `r round(std_dev, 2)`\
+**margin of error             =** `r margin_of_error`\
+\
+\
+\
+\
+
+![5.14](https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/images/Ex5.14.png)
 
 
-![5.32](https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/images/ex5.32.PNG)
+(a) Solution
+\
+\
+```{r}
+
+margin_of_error <- 25
+Std_dev <- 250
+
+# z-score for 90% CI
+
+z_Score <- qnorm(0.95)
+
+z_Score
+
+number_obs  <- ((Std_dev*z_Score) / margin_of_error)^2
+number_obs
+
+```
+\
+**Sample size needed = ** `r number_obs`\
+\
+
+(b) Solution
+\
+\
+**We can see from the formula that number_obs is directly proportional to the z_score.This means that as we increase the Z_score, the number_obs also increases. Thus Luke's sample should be larger than Raina's.**  
+\
+
+(c) Solution
+\
+
+```{r}
+
+margin_of_error <- 25
+Std_dev <- 250
+
+# z-score for 99% CI
+
+z_Score <- qnorm(0.995)
+
+z_Score
+
+number_obs  <- ((Std_dev*z_Score) / margin_of_error)^2
+number_obs
+
+```
+\
+**Sample size needed = ** `r round(number_obs)`\
+\
+\
+\
+
+![5.20](https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/images/Ex5.20.png)
+
+\
+\
+**(a)  The distribution of the difference around the mean looks to be normal. There seems to be no difference in the average reading and writing scores.**
+\
+\
+**(b) Given that this is a simple random sample, I would assume that each student's score is independent of another student's score. However, the reading skills when compared to the writing skills of the same student would not be independent.**
+\
+\
+**(c) We could form the hypothesis as below assuming that we are talking about difference in average reading and writing scores (and not average difference between reading and writing scores):**  
+
+**H~0~:** There is no difference in the averages of reading and writing score i.e $(\mu$~reading~ $-$ $\mu$~writing~$) = 0$ 
+
+**H~A~:** There is a difference in the averages of reading and writing score i.e $(\mu$~reading~ $-$ $\mu$~writing~$) \ne 0$ 
+\
+\
+**(d) The below conditons need to be satisfied:**   
+
+Independence of observations: As we noted before, each student score is independent of another student. Hence this condition is satisfied.  
+
+Observations come from nearly normal distribution: Both the reading and the writing scores boxplots do not seem to show any outliers. They seem to be reasonably normally distributed.  
+\
+
+**(e) We can form the below hypothesis for the average difference in scores:**
+\
+**H~0~: $\mu$ ~diff~ $= 0$** 
+
+**H~A~: $\mu$ ~diff~ $\ne 0$** 
+\
+\
+**Assuming that the samples are less than 10% of the students and are from a simple random sample and the difference is normally distributed, we can apply the t-distribution as below:**   
+
+```{r}
+std_dev_diff <- 8.887
+mean_diff <- -0.545
+number_obs_diff <- 200
+
+# standard error
+standard_error_diff <- std_dev_diff / sqrt(number_obs_diff)
+
+# T statistic
+t_diff <- (mean_diff - 0) / standard_error_diff
+
+degrees_freedom <- number_obs_diff - 1
+
+p_Value <- pt(t_diff, df=degrees_freedom)
+
+p_Value
+
+```
+
+**Since, the p value is not less than 0.05 we fail to reject the null hypothesis. It can be concluded that there is no convincing evidence of a difference in the scores of reading and writing.**  
+\
+
+**(f) We have rejected the alternative hypothesis. If we have incorrectly rejected the altenative hypothesis, we may have made a Type II error.**
+\
+\
+
+**(g) Since our null hypothesis is that there is no difference between the scores, we would like the confidence interval for the average difference include 0. If the confidence interval includes 0 then it means that the difference is not positive or negative. Therefore this results in the failure to reject the null hypothesis.**
+
+\
+\
 
 
-![5.48](https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/images/ex5.48.PNG)
+![5.32](https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/images/Ex5.32.png)
 
+\
+**Lets form the below hypothesis:**
+
+**H~0~:** There is no difference in the mean fuel economy of automatic and manual cars i.e $(\mu$~automatic~ $-$ $\mu$~manual~$) = 0$
+
+**H~A~:** There is a difference in the mean fuel economy of automatic and manual cars i.e $(\mu$~automatic~ $-$ $\mu$~manual~$) \ne 0$
+\
+
+Next, lets calculate the point estimate of population difference.
+
+```{r}
+number_obs <- 26
+
+mean_automatic <- 16.12
+mean_manual <- 19.85
+
+std_dev_automatic <- 3.58
+std_dev_manual <- 4.51
+
+
+# Difference in means
+means_diff <- mean_automatic - mean_manual
+means_diff
+
+# Standard error
+standard_error_diff <- sqrt( (std_dev_automatic^2 / number_obs) + (std_dev_manual^2 / number_obs) )
+standard_error_diff
+
+# t-statistic
+t_diff <- (means_diff - 0) / standard_error_diff
+t_diff
+
+
+#p-value
+p_Value <- pt(t_diff, df=number_obs-1)
+p_Value
+```
+
+**The p-value of `r round(p_Value, 2)` is less than 0.05, we reject the null hypothesis in favour of alternative hypothesis. We can conclude that there is strong evidence of a difference in fuel efficiency between manual and automatic transmissions.**
+\
+\
+\
+
+![5.48](https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/images/Ex5.48.png)
+\
+\
+
+**(a) We will form the below hypothesis:**
+
+H~0~: There is no difference in the mean / average hours worked across the 5 groups i.e 
+$\mu$~LeHS~ $=\mu$~HS~ $=\mu$~JrCol~ $=\mu$~Bch~ $=\mu$~Grad~ $= 0$
+
+H~A~: At least one group has a difference in the mean / average hours worked with the others 
+\
+
+
+**(b) The following conditions must be met:**
+
+The observations are independent within and across groups: Assuming that the survey has been carried out in an unbiased manner with random sampling, we will consider that this condition has been met.  
+
+The data within each group are nearly normal: The Bachelor's distribution seems to be skewed with significant outliers on lower end of the scale. Similarly, the HS boxplot indicates a skew at the higher end of the scale. Most of the other groups also have some outliers. We cannot consider that this condition has been met.
+
+The variability across the groups is about equal: The standard deviation indicates that both Bachelor's and Jr Coll have a different pattern of variation than the other groups.All other groups seem to have the standard deviation around 15.  
+
+
+**(c) Calculating for the missing values:**
+
+```{r}
+n <- 1172
+k <- 5
+
+degrees_freedom_G <- k - 1
+degrees_freedom_E <- n - k
+
+degrees_freedom_G
+degrees_freedom_E
+
+mean_Total <- 40.45
+
+groups_data <- data.frame(n=c(121,546,97,253,155), 
+                     sd=c(15.81,14.97,18.1,13.62,15.51), 
+                     mean=c(38.67,39.6,41.39,42.55,40.85))
+# Compute the SSG
+SSG <- sum( groups_data$n * (groups_data$mean - mean_Total)^2 )
+SSG
+
+# Compute the MSG
+MSG <- (1 / degrees_freedom_G) * SSG
+
+# Compute the MSE
+SSE <- 267382
+MSE <- SSE / degrees_freedom_E
+MSE
+
+# Compute the F statistic
+F <- MSG / MSE
+F
+
+```
+
+**Below is the completed table:**
+
+|            | Df   | Sum Sq   | Mean Sq | F value  | Pr(>F) |
+|------------|------|----------|---------|----------|--------|
+|  degree    |    **4** |   **2004.1** |  501.54 | **2.186745** | 0.0682 |
+|  Residuals | **1167** | 267382   |  **229.12** |          |        |
+|  Total     | **1171** | **269386.1** |         |          |        |
+
+
+**(d) The p-value = 0.0682 is greater than 0.05. Hence we fail to reject the null hypothesis. We conclude that there is no significant difference between the groups.**
+\
+\
