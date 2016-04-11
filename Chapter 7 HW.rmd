@@ -1,0 +1,40 @@
+---
+title: "Chapter 6 HW"
+author: "Kishore Prasad"
+date: "March 31, 2016"
+output: html_document
+---
+
+![Ex7.24](https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/images/Ex7.24.png)
+\
+\
+
+
+\
+\
+
+![Ex7.26](https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/images/Ex7.26.png)
+\
+\
+
+
+\
+\
+
+![Ex7.30](https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/images/Ex7.30.png)
+
+\
+\
+
+\
+\
+\
+
+![Ex7.40](https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/images/Ex7.40.png)
+
+\
+\
+
+
+\
+\
