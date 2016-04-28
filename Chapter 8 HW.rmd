@@ -1,175 +1,57 @@
 ---
-title: "Chapter 7 HW"
+title: "Chapter 8 HW"
 author: "Kishore Prasad"
-output: pdf_document
+output: html_document
 ---
 
-![Ex7.24](https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/images/Ex7.24.png)
-\
 
-(a) From the scatter plot it is evident that the relationship between number of calories and amount of carbohydrates is positive. As amount of carbohydrates increases the calories also increases and vice versa. 
-\
-\
-
-(b) Calories is the Explanatory variable and Carbohydrates is the response variable.
-\
-\
-
-(c) Given any food item, we may want to predict the amount of carbohydrates based on the number of calories. To do this, we can make use of the fitted regression line.   
-\
-
-(d) 
-
-**Linearity:** There is a linear trend available. However, the scatter plot indicates that the data is widely dispersed. 
-
-**Nearly normal residuals:** There is a slight left skew in the residuals but we can consider this to be normal. 
-
-**Constant variability:** The residuals scatter plot does not show a constant variability. The values are nearer to the residuals line at the lower end of the scale and are quite scattered towards the higher end. So I would not consider this to be constant variability. 
-
-**Independent observations:** The items are presumed to be independent of each other since the ingredients and process for manufacture might be different for each item.  
-
-I would conclude that the data meets the requirements for fitting a least squares line.
-
-\
-\
-
-![Ex7.26](https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/images/Ex7.26.png)
-\
-\
-
-(a) The equation for the regression line is given by the formula: 
-
-\[
-  \hat{y} = \beta{0} + \beta{1} * x
-\]
-
-Calculating $\beta{0}$ and $\beta{1}$ as below:
-
-```{r}
-
-beta_1 <- (9.41 / 10.37) * 0.67
-beta_0 <- (beta_1 * (0 - 107.2)) + 171.14
-
-```
-
-We get the regression equation as :
-
-\[
-  \hat{height} = `r beta_0` + `r beta_1` * girth
-\]
-
-\
-\
-
-(b) The intercept of `r beta_0` is the height when the sholder girth is 0. The Slope of `r beta_1` indicates that height increases by `r beta_1` cms for every 1 cms increase in girth.
-\
-\
-
-(c) Computing R2, we get R2 = `r 0.67^2`. This means that the linear model explains about `r round((0.67^2)*100,0)`% of the variation in height data.
-\
-\
-
-(d) Following is the calculation for predicting the height for a student of shoulder girth of 100 cms:
-
-```{r}
-
-pred_height <- beta_0 + beta_1 * 100
-
-```
-
-The predicted height is `r round(pred_height,2)` cms.
-\
-\
-
-(e) Calculating the residual as below:
-
-```{r}
-
-actual_height <- 160
-
-residual <- actual_height - pred_height
-
-```
-
-The residual of `r residual` indicates that we have over estimated the height  
-\
-\
-
-(f) From the original exercise (Ex 7.15), we see that the minimum shoulder girth was about 85 cms. Hence, the shoulder girth of 56 cms for a 1 year old does not fall within the original data that was used to generate the regression line. We would be extrapolating if we were to predict the height with this shoulder girth. Extrapolation is an unreliable estimate and should not be used.   
-
-\
-\
-
-![Ex7.30](https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/images/Ex7.30.png)
-
-\
-\
-
-```{r}
-beta_0 <- -0.357
-beta_1 <-  4.034
-
-
-```
-\
-
-(a) The following is the linear model:
-
-\[
-  \hat{heart wgt} = `r beta_0` + `r beta_1` * body wgt 
-\]
-
-\
-
-(b) The intercept of `r beta_0` tells us that for a cat with 0 KG body weight, the heart will weigh `r beta_0` gms.  
-\
-\
-
-(c) The slope of `r beta_1` tells us that the heart weight increases by `r beta_1` grams for every 1 kg increase in body weight.
-\
-\
-
-(d) R^2 of 64.66 % tells us 64.66% of the variation in the heart weight is explained by the linear model.
-\
-\
-
-(e) The correlation coefficient is the square root of R^2 and when calculated is : `r sqrt(0.6466)`
+![Ex8.2](https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/images/Ex8.2.png)
 \
 \
 
 
-![Ex7.40](https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/images/Ex7.40.png)
+
 
 \
 \
-
-(a) Below is the calculation for beta_1:
-
-```{r}
-
-beta_1 <- (3.9983 - 4.010) / -0.0883 
-beta_1
-
-```
 \
-
-Slope is `r beta_1`
+![Ex8.4](https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/images/Ex8.4.png)
 \
 \
 
-(b) The p-value for the slope is 0.0000. This means that the slope is not 0 on a two tail test. Given that the t value is 4.13 and half the two-tail p-value is still 0.0000, it means a positive relationship between teaching evaluation and beauty.
+
+
+
 \
 \
 \
+![Ex8.8](https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/images/Ex8.8.png)
+\
+\
 
-(c)
 
-**Linearity:** The data points seem to be clustered. We cannot confirm or deny the trend based on visual inspection.  
 
-**Nearly normal residuals:** There is a slight left skew in the histogram but we can consider this to be nearly normal. 
 
-**Constant variability:** Except for some outliers, the residuals scatter plot does show a constant variability.  
+\
+\
+\
+![Ex8.16](https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/images/Ex8.16.png)
+\
+\
 
-**Independent observations:** Given that the number of professors (463 professors) are less than 10% of the population, I would assume these to be independent observations. 
+
+
+
+\
+\
+\
+![Ex8.18](https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/images/Ex8.18.png)
+\
+\
+
+
+
+
+\
 \
 \
