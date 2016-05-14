@@ -1,17 +1,32 @@
 ---
 title: "Chapter 8 HW"
 author: "Kishore Prasad"
-output: html_document
+output: pdf_document
 ---
+```{r}
+library(ggplot2)
 
+```
 
 ![Ex8.2](https://raw.githubusercontent.com/kishkp/CUNY-StatsAndProb/master/images/Ex8.2.png)
 \
 \
 
+a) The equation for baby weight is:
 
+$\hat{Baby weight}$ = 120.07 - 1.93 $\times$ parity
+\
+\
 
+b) The slope (120.07) means that a first born (with a parity of 0) would be predicted to weigh 120.07 (120.07 - 1.93 $\times$ 0) ounces.\ 
 
+The others (with a parity of 1) would be predicted to weigh `r 120.07 - (1.93*1)` (120.07 - 1.93 $\times$ 1) ounces 
+\
+\
+
+c) A p-value of 0.1052 for parity indicates that there is no statistically significant relationship between average birth weight and parity. 
+\
+\
 \
 \
 \
@@ -19,9 +34,63 @@ output: html_document
 \
 \
 
+a) The equation for absenteeism is given by:
 
+$\hat{absenteeism}$ = 18.93 - 9.11 $\times$ eth + 3.10 $\times$ sex + 2.15 $\times$ lrn
+\
+\
 
+b) The following are the interpretation of slope for each variable:
 
+* All else being equal, there is a decrease of 9.11 days in predicted absenteeism when the eth value is "No"  (not aboriginal) in an observation. 
+\
+* All else being equal, there is an increase of 3.1 days in predicted absenteeism when the sex is male in an observation. 
+\
+* All else being equal, there is a decrease of 2.15 days in predicted absenteeism when the lrn value is "slow learner"  in an observation. 
+\
+\
+\
+
+c) We first need to calculate the predicted days missed as below:
+
+```{r}
+
+eth <- 0
+sex <- 1
+lrn <- 1
+actual <- 2
+
+predicted <- 18.93 - 9.11 * eth + 3.1 * sex + 2.15 * lrn
+predicted
+
+residual <- actual - predicted
+residual
+
+```
+
+Therefore the residual is `r residual`
+\
+\
+
+d) The following is the calculation:
+
+```{r}
+
+n <- 146
+k <- 3
+var_residuals <- 240.57
+var_absentdays <- 264.17
+
+R2 <- 1 - (var_residuals / var_absentdays)
+R2
+
+adjustedR2 <- 1 - (1 - R2) * ( (n-1) / (n-k-1) )
+adjustedR2
+
+```
+
+Therefore, $R^2$ = `r R2` and adjusted $R^2$ = `r adjustedR2`  
+\
 \
 \
 \
@@ -29,9 +98,9 @@ output: html_document
 \
 \
 
+a) The variable with the highest adjusted $R^2$ is lrn (0.0723). Hence this variable should be removed first.
 
-
-
+\
 \
 \
 \
@@ -39,9 +108,30 @@ output: html_document
 \
 \
 
+a) Based on a visual inspection of the table, I can find that damages to O-ring is more pronounced for temperatures less than 66 farenheit. There seem to be less damage when the temperature is equal to or above this.
+\
+\
 
+b) The key components are described as follows:
 
+* Intercept - The intercept estimate of 11.6630 indicates what the failure value will be if the temperature was 0.
+* Slope - The slope estimate of -0.2162 indicates that the failure decreases by 0.2162 as the temperature increases by 1 degree.
+* The z value and P value help in identifying the strength of the relationship \
 
+\
+\
+
+c) The following is the equation for the logistic regression:
+
+$log_e(\frac{p_i}{1-p_i})$ = 11.6630 - 0.2162 $\times$ $x_{temp}$
+
+\
+\
+\
+
+d) I would say that the concerns regarding the O-rings are justified. The p-value close to zero.It seems to indicate that O-ring failure is strongly correlated to temperature.  
+\
+\
 \
 \
 \
@@ -49,8 +139,56 @@ output: html_document
 \
 \
 
+a) The following are the calculations for 51, 53 and 55 degrees:
 
+```{r}
 
+temp = 51
+p51 <- exp(11.6630 - (0.2162 * temp)) / (1 + exp(11.6630 - (0.2162 * temp)))
+p51
+
+temp = 53
+p53 <- exp(11.6630 - (0.2162 * temp)) / (1 + exp(11.6630 - (0.2162 * temp)))
+p53
+
+temp = 55
+p55 <- exp(11.6630 - (0.2162 * temp)) / (1 + exp(11.6630 - (0.2162 * temp)))
+p55
+
+```
+
+Therefore the probabilities for 51, 53 and 55 are `r p51`, `r p53` and `r p55` respectively.
+\
+\
+
+b) Lets first create a data frame based on the values provided:
+
+```{r}
+temps <- seq(51, 71, by=2)
+probs <- c(p51, p53, p55, 0.341, 0.251, 0.179, 0.124, 0.084, 0.056, 0.037, 0.024)
+
+df_prob <- data.frame(Temperature=temps, Prob_Damage=probs)
+```
+
+We now plot the values as a smooth curve:
+
+```{r}
+g1 <- ggplot(df_prob) + geom_line(aes(x=df_prob$Temperature, y=df_prob$Prob_Damage ))
+g1
+```
+
+\
+\
+
+c) I would say that we do not have sufficient data to learn from a logistic model. The following are the conditions / assumptions for a logistic model:
+
+Conditions/assumptions required for logistic regression model validity include:
+
+Each predictor (x), is linearly related to logit((p_i)) if all other predictors are help constant.
+Based on the visualization above, temperature does seem to have a linear relationship to the probability of damage.
+
+Each outcome (Y_i) is independent of the other outcomes.
+I am assuming that the O-rings are completely replaced for each mission. Given this assumption, I would say that the independence condition is met.
 
 \
 \
